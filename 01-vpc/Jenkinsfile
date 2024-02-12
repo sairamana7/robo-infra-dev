@@ -5,7 +5,7 @@ pipeline {
         }
     }
     options {
-        ansiColor('xterm')
+      //  ansiColor('xterm')
         // timeout(time: 1, unit: 'HOURS')
         // disableConcurrentBuilds()
     }
@@ -31,10 +31,10 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {
-                expression { 
-                    params.action == 'apply'
-                }
+            // when {
+            //     expression { 
+            //         params.action == 'apply'
+            //     }
             }
             input {
                 message "Should we continue?"
@@ -52,10 +52,10 @@ pipeline {
             }
         }
         stage('Destroy') {
-            when {
-                expression { 
-                    params.action == 'destroy'
-                }
+            // when {
+            //     expression { 
+            //         params.action == 'destroy'
+            //     }
             }
             input {
                 message "Should we continue?"
