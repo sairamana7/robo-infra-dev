@@ -4,11 +4,11 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    // options {
-    //   //  ansiColor('xterm')
-    //     // timeout(time: 1, unit: 'HOURS')
-    //     // disableConcurrentBuilds()
-    //}
+    options {
+        ansiColor('xterm')
+        // timeout(time: 1, unit: 'HOURS')
+        // disableConcurrentBuilds()
+    }
     parameters {
         choice(name: 'action', choices: ['apply', 'destroy'], description: 'Pick something')
     }
@@ -27,14 +27,14 @@ pipeline {
                 sh """
                     cd 01-vpc
                     terraform plan
-                    """
+                """
             }
-        
+        }
         stage('Deploy') {
-            // when {
-            //     expression { 
-            //         params.action == 'apply'
-            //     }
+            when {
+                expression { 
+                    params.action == 'apply'
+                }
             }
             input {
                 message "Should we continue?"
@@ -52,10 +52,10 @@ pipeline {
             }
         }
         stage('Destroy') {
-            // when {
-            //     expression { 
-            //         params.action == 'destroy'
-            //     }
+            when {
+                expression { 
+                    params.action == 'destroy'
+                }
             }
             input {
                 message "Should we continue?"
@@ -85,3 +85,4 @@ pipeline {
             echo 'I will say Hello when pipeline is success'
         }
     }
+}
