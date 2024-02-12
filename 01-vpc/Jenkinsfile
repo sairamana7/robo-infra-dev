@@ -27,9 +27,9 @@ pipeline {
                 sh """
                     cd 01-vpc
                     terraform plan
-                """
+                    """
             }
-        }
+        
         stage('Deploy') {
             // when {
             //     expression { 
